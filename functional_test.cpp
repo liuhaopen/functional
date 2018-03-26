@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include "functional_stl.h"
 
-//±¾Àà×¨ÃÅ²âÊÔstl::functionÀà
+//æœ¬ç±»ä¸“é—¨æµ‹è¯•stl::functionç±»
 
 #define nullptr NULL
 
@@ -56,18 +56,18 @@ TEST(Function, EmptyUse)
 	TestClass testClass;
 	{
 		stl::function<void()> func;
-		//Ä¬ÈÏÊÇ¿ÕµÄ
+		//é»˜è®¤æ˜¯ç©ºçš„
 		ASSERT_TRUE(func == NULL);
 		func = CC_CALLBACK_0_TEST(TestClass::test,&testClass);
 		ASSERT_TRUE(func != NULL);
 
-		//µ÷ÓÃÁËTestClass::testºóisCallTested½«·µ»ØÕæ,»¹Ã»µ÷ÓÃÖ®Ç°ÊÇ·µ»Ø¼ÙµÄ
+		//è°ƒç”¨äº†TestClass::teståisCallTestedå°†è¿”å›çœŸ,è¿˜æ²¡è°ƒç”¨ä¹‹å‰æ˜¯è¿”å›å‡çš„
 		ASSERT_FALSE(testClass.isCallTested())<<"muse be the TestClass error!";
 		func();
 		ASSERT_TRUE(testClass.isCallTested())<<"func didn't call TestClass::test actualy!";
 		func = nullptr;
 	}
-	//ÈÎÒâÀàĞÍ¶¼¿ÉÒÔ£¬°üÀ¨×Ô¶¨ÒåÀàĞÍ
+	//ä»»æ„ç±»å‹éƒ½å¯ä»¥ï¼ŒåŒ…æ‹¬è‡ªå®šä¹‰ç±»å‹
 	{
 		stl::function<int(TestClass*,int,int)> func = CC_CALLBACK_3_TEST(TestClass::pointerTest_add,&testClass);
 		ASSERT_EQ(1+2,func(&testClass,1,2));
@@ -78,61 +78,61 @@ TEST(Function, BindParamTest)
 {
 	TestClass testClass;
 	{
-		//²»°ó¶¨²ÎÊı
+		//ä¸ç»‘å®šå‚æ•°
 		stl::function<int(int,int,int)> func0 = CC_CALLBACK_3_TEST(TestClass::add3,&testClass);
 		ASSERT_EQ(1+2+3,func0(1,2,3));
 
-		//°ó¶¨×îºóÒ»¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸€ä¸ªå‚æ•°
 		stl::function<int(int,int)> func1 = CC_CALLBACK_2_TEST(TestClass::add3,&testClass,3);
 		ASSERT_EQ(1+2+3,func1(1,2));
 
-		//°ó¶¨×îºóÁ½¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸¤ä¸ªå‚æ•°
 		stl::function<int(int)> func2 = CC_CALLBACK_1_TEST(TestClass::add3,&testClass,2,3);
 		ASSERT_EQ(1+2+3,func2(1));
 
-		//°ó¶¨×îºóÈı¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸‰ä¸ªå‚æ•°
 		stl::function<int()> func3 = CC_CALLBACK_0_TEST(TestClass::add3,&testClass,1,2,3);
 		ASSERT_EQ(1+2+3,func3());
 
-		//²âÊÔ³£Á¿ÒıÓÃ
+		//æµ‹è¯•å¸¸é‡å¼•ç”¨
 		const stl::function<int()>& func33 = func3;
 		ASSERT_EQ(1+2+3,func33());
 	}
 	{
-		//²»°ó¶¨ÈÎºÎÊµ²Î
+		//ä¸ç»‘å®šä»»ä½•å®å‚
 		stl::function<int(int,int)> func = CC_CALLBACK_2_TEST(TestClass::add2,&testClass);
 		ASSERT_EQ(1+2,func(1,2));
 
-		//°ó¶¨×îºóÁ½¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸¤ä¸ªå‚æ•°
 		stl::function<int(int)> func2 = CC_CALLBACK_1_TEST(TestClass::add2,&testClass,2);
 		ASSERT_EQ(1+2,func2(1));
 
-		//°ó¶¨×îºóÒ»¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸€ä¸ªå‚æ•°
 		stl::function<int()> func3 = CC_CALLBACK_0_TEST(TestClass::add2,&testClass,1,2);
 		ASSERT_EQ(1+2,func3());
 	}
 	{
-		//²»°ó¶¨ÈÎºÎÊµ²Î
+		//ä¸ç»‘å®šä»»ä½•å®å‚
 		stl::function<int(int)> func = CC_CALLBACK_1_TEST(TestClass::returnParam,&testClass);
 		ASSERT_EQ(1,func(1));
 
-		//°ó¶¨×îºóÒ»¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸€ä¸ªå‚æ•°
 		stl::function<int()> func2 = CC_CALLBACK_0_TEST(TestClass::returnParam,&testClass,1);
 		ASSERT_EQ(1,func2());
 	}
 	{
-		//°ó¶¨×îºóÒ»¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸€ä¸ªå‚æ•°
 		stl::function<int()> func = CC_CALLBACK_0_TEST(TestClass::resturnInt,&testClass);
 		ASSERT_EQ(1,func());
 	}
 	{
-		//ÈÎÒâÀàĞÍ¶¼¿ÉÒÔ£¬°üÀ¨×Ô¶¨ÒåÀàĞÍ
+		//ä»»æ„ç±»å‹éƒ½å¯ä»¥ï¼ŒåŒ…æ‹¬è‡ªå®šä¹‰ç±»å‹
 		stl::function<int(TestClass*)> func2 = CC_CALLBACK_1_TEST(TestClass::pointerTest_add,&testClass,1,2);
 		ASSERT_EQ(1+2,func2(&testClass));
 	}
 }
 
-//²âÊÔ°ó¶¨È«¾Öº¯ÊıµÄÊµ²Î
+//æµ‹è¯•ç»‘å®šå…¨å±€å‡½æ•°çš„å®å‚
 void g_voidMethod()
 {
 }
@@ -155,45 +155,45 @@ int g_add3(int a,int b,int c)
 TEST(Function, GlobalMethodTest)
 {
 	{
-		//²»°ó¶¨²ÎÊı
+		//ä¸ç»‘å®šå‚æ•°
 		stl::function<int(int,int,int)> func0 = stl::bind(g_add3,stl::placeholders::_1,stl::placeholders::_2,stl::placeholders::_3);
 		ASSERT_EQ(1+2+3,func0(1,2,3));
 
-		//°ó¶¨×îºóÒ»¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸€ä¸ªå‚æ•°
 		stl::function<int(int,int)> func1 = stl::bind(g_add3,stl::placeholders::_1,stl::placeholders::_2,3);
 		ASSERT_EQ(1+2+3,func1(1,2));
 
-		//°ó¶¨×îºóÁ½¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸¤ä¸ªå‚æ•°
 		stl::function<int(int)> func2 = stl::bind(g_add3,stl::placeholders::_1,2,3);
 		ASSERT_EQ(1+2+3,func2(1));
 
-		//°ó¶¨×îºóÈı¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸‰ä¸ªå‚æ•°
 		stl::function<int()> func3 = stl::bind(g_add3,1,2,3);
 		ASSERT_EQ(1+2+3,func3());
 
-		//²âÊÔ³£Á¿ÒıÓÃ
+		//æµ‹è¯•å¸¸é‡å¼•ç”¨
 		const stl::function<int()>& func33 = func3;
 		ASSERT_EQ(1+2+3,func33());
 	}
 	{
-		//²»°ó¶¨²ÎÊı
+		//ä¸ç»‘å®šå‚æ•°
 		stl::function<int(int,int)> func0 = stl::bind(g_add2,stl::placeholders::_1,stl::placeholders::_2);
 		ASSERT_EQ(1+2,func0(1,2));
 
-		//°ó¶¨×îºóÒ»¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸€ä¸ªå‚æ•°
 		stl::function<int(int)> func1 = stl::bind(g_add2,stl::placeholders::_1,2);
 		ASSERT_EQ(1+2,func1(1));
 
-		//°ó¶¨×îºóÁ½¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸¤ä¸ªå‚æ•°
 		stl::function<int()> func2 = stl::bind(g_add2,1,2);
 		ASSERT_EQ(1+2,func2());
 	}
 	{
-		//²»°ó¶¨²ÎÊı
+		//ä¸ç»‘å®šå‚æ•°
 		stl::function<int(int)> func0 = stl::bind(g_add1,stl::placeholders::_1);
 		ASSERT_EQ(1,func0(1));
 
-		//°ó¶¨×îºóÒ»¸ö²ÎÊı
+		//ç»‘å®šæœ€åä¸€ä¸ªå‚æ•°
 		stl::function<int()> func1 = stl::bind(g_add1,1);
 		ASSERT_EQ(1,func1());
 	}
@@ -205,7 +205,7 @@ TEST(Function, GlobalMethodTest)
 
 class ReturnCharTest : public::testing::TestWithParam<char>{};
 INSTANTIATE_TEST_CASE_P(Function, ReturnCharTest, testing::Values('a','b','\0','c',' '));
-//ÈÎÒâÀàĞÍ¶¼¿ÉÒÔ£¬°üÀ¨×Ô¶¨ÒåÀàĞÍ
+//ä»»æ„ç±»å‹éƒ½å¯ä»¥ï¼ŒåŒ…æ‹¬è‡ªå®šä¹‰ç±»å‹
 TEST_P(ReturnCharTest, CheckCharReturn)
 {
 	char n =  GetParam();
@@ -216,10 +216,10 @@ TEST_P(ReturnCharTest, CheckCharReturn)
 	}
 }
 
-//²âÊÔ´«ÈëÖ¸Õë²ÎÊıÊÇ·ñ×Ô¶¯É¾³ı
+//æµ‹è¯•ä¼ å…¥æŒ‡é’ˆå‚æ•°æ˜¯å¦è‡ªåŠ¨åˆ é™¤
 
 
-//²âÊÔÖ±½Ó°Ñ¶à²ÎÊıµÄfunction×ª³ÉÉÙ²ÎÊıµÄfunction
+//æµ‹è¯•ç›´æ¥æŠŠå¤šå‚æ•°çš„functionè½¬æˆå°‘å‚æ•°çš„function
 TEST(Function, FunctionBindTest)
 {
 	TestClass testClass;

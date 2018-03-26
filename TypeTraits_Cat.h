@@ -7,7 +7,7 @@ namespace Cat
 	{
 		class NullType;
 
-		//ÅĞ¶ÏÊÇ·ñÊÇÖ¸ÕëÀàĞÍ
+		//åˆ¤æ–­æ˜¯å¦æ˜¯æŒ‡é’ˆç±»å‹
 		template<typename T>
 		class TypeTraits
 		{
@@ -49,26 +49,26 @@ namespace Cat
 		{
 			typedef char Small;
 			class Big{Small Dummy[2];};
-			//ÖØÔØÁ½¸öTestº¯Êı£¬Èç¹ûT¿ÉÒÔ×ª»¯ÎªUÄÇ¾Í»á½øÈëÏÂÃæÕâ¸öº¯Êı
+			//é‡è½½ä¸¤ä¸ªTestå‡½æ•°ï¼Œå¦‚æœTå¯ä»¥è½¬åŒ–ä¸ºUé‚£å°±ä¼šè¿›å…¥ä¸‹é¢è¿™ä¸ªå‡½æ•°
 			static Small Test(U);
-			//Èç¹ûT×ª»¯²»³ÉUÀàĞÍµÄ»°¾Í»á½øÈëstatic Big Test(...)Õâ¸öº¯Êı
+			//å¦‚æœTè½¬åŒ–ä¸æˆUç±»å‹çš„è¯å°±ä¼šè¿›å…¥static Big Test(...)è¿™ä¸ªå‡½æ•°
 			static Big Test(...);
-			//ÆäÊµTest(MakeT())Ïàµ±ÓÚTest(T),Õâ¸öMakeTÖ»ÊÇ·ÀÖ¹TÀàĞÍÃ»ÓĞpublicµÄ¹¹Ôìº¯ÊıµÄÇé¿ö
+			//å…¶å®Test(MakeT())ç›¸å½“äºTest(T),è¿™ä¸ªMakeTåªæ˜¯é˜²æ­¢Tç±»å‹æ²¡æœ‰publicçš„æ„é€ å‡½æ•°çš„æƒ…å†µ
 			static T MakeT();
 		public:
 			enum
 			{
-				//TÊÇ·ñ¿ÉÒÔ×ªÎªUÀàĞÍ
+				//Tæ˜¯å¦å¯ä»¥è½¬ä¸ºUç±»å‹
 				IsExist = sizeof(Test(MakeT())) == sizeof(Small)
 			};
 			enum
 			{
-				//ÊÇ·ñ´æÔÚË«ÏòÀàĞÍ×ª»»
+				//æ˜¯å¦å­˜åœ¨åŒå‘ç±»å‹è½¬æ¢
 				Exist2Way = IsExist && Conversion<U,T>::IsExist
 			};
 			enum
 			{
-				//ÊÇ·ñÊÇÍ¬ÖÖÀàĞÍ
+				//æ˜¯å¦æ˜¯åŒç§ç±»å‹
 				IsSame = false
 			};
 		};
@@ -85,7 +85,7 @@ namespace Cat
 		};
 
 
-		//ÓÃÓÚ±£´æÀàµÄÀàĞÍ
+		//ç”¨äºä¿å­˜ç±»çš„ç±»å‹
 		class TypeHolder
 		{
 		public:
@@ -93,11 +93,11 @@ namespace Cat
 			virtual ~TypeHolder(){}
 			virtual const void* GetValue() const = 0; 
 			virtual TypeHolder * Clone() const = 0;
-			//Èç¹û±£ÁôµÄÊÇÖ¸ÕëÀàĞÍ¾Í¿ÉÒÔÔÚDeleteValueÀïÃædelete
+			//å¦‚æœä¿ç•™çš„æ˜¯æŒ‡é’ˆç±»å‹å°±å¯ä»¥åœ¨DeleteValueé‡Œé¢delete
 			virtual void DeleteValue(){}
 			void SetDeletePtr(bool needDelete){m_bNeedDeletePtr = needDelete;}
 		protected:
-			bool m_bNeedDeletePtr;//Èç¹û±£´æµÄÊÇÖ¸ÕëÀàĞÍµÄÊı¾İ£¬ÊÇ·ñĞèÒªµ÷ÓÃdeleteÊÍ·ÅÆäÊı¾İ
+			bool m_bNeedDeletePtr;//å¦‚æœä¿å­˜çš„æ˜¯æŒ‡é’ˆç±»å‹çš„æ•°æ®ï¼Œæ˜¯å¦éœ€è¦è°ƒç”¨deleteé‡Šæ”¾å…¶æ•°æ®
 		};
 		template<typename ValueType,bool isPointer>
 		class Holder:public TypeHolder
@@ -113,7 +113,7 @@ namespace Cat
 			{
 				return Value;
 			}
-			//µ±±£´æµÄÖµÎªÒıÓÃÊ±¾Í·µ»ØÆäÖ¸Õë
+			//å½“ä¿å­˜çš„å€¼ä¸ºå¼•ç”¨æ—¶å°±è¿”å›å…¶æŒ‡é’ˆ
 			//void* GetValue(Int2Type<false>) const
 			//{
 			//	return &Value;
@@ -124,7 +124,7 @@ namespace Cat
 				return &Value;
 				//return ValuePtr;
 			}
-			//µ±±£´æµÄÖµÎªÖ¸ÕëÊ±¾ÍÖ±½Ó·µ»ØÖ¸ÕëËùÖ¸µÄÖµ
+			//å½“ä¿å­˜çš„å€¼ä¸ºæŒ‡é’ˆæ—¶å°±ç›´æ¥è¿”å›æŒ‡é’ˆæ‰€æŒ‡çš„å€¼
 			void* GetValue(Int2Type<true>) const
 			{
 				return Value;
@@ -135,7 +135,7 @@ namespace Cat
 			}
 			void DeleteValue(Int2Type<true>)
 			{
-				//±£ÁôµÄÊÇÖ¸ÕëµÄ»°¾Ídelete
+				//ä¿ç•™çš„æ˜¯æŒ‡é’ˆçš„è¯å°±delete
 				if (m_bNeedDeletePtr && Value!=NULL)
 				{
 					delete Value;
@@ -144,7 +144,7 @@ namespace Cat
 			}
 			void DeleteValue(Int2Type<false>)
 			{
-				//Èç¹û±£ÁôµÄÊÇÆÕÍ¨¶ÔÏó¾Í²»»á×öÊ²Ã´ÁË
+				//å¦‚æœä¿ç•™çš„æ˜¯æ™®é€šå¯¹è±¡å°±ä¸ä¼šåšä»€ä¹ˆäº†
 			}
 			~Holder()
 			{
@@ -160,7 +160,7 @@ namespace Cat
 	}//Type
 }//Cat
 
-//ÅĞ¶ÏTÀàĞÍÊÇ²»ÊÇUµÄ¸¸Àà
+//åˆ¤æ–­Tç±»å‹æ˜¯ä¸æ˜¯Uçš„çˆ¶ç±»
 #define SuperSubClass(T,U) \
 	(Cat::Type::Conversion<const U*,const T*>::IsExist && !Cat::Type::Conversion<const T*,const void*>::IsSame)
 #define SuperSubClass_Strict(T,U) \

@@ -11,7 +11,7 @@ namespace stl
 {
 	class NullType;
 
-#pragma region SlotFunctorBaseµÄÊµÏÖ
+#pragma region SlotFunctorBaseçš„å®ç°
 	template<typename ReturnType>
 	class SlotFunctorBase
 	{
@@ -24,10 +24,10 @@ namespace stl
 		virtual void setParam2(Cat::Type::TypeHolder* m_pArge1)const{}
 		virtual void setParam3(Cat::Type::TypeHolder* m_pArge1)const{}
 	};
-#pragma endregion SlotFunctorBaseµÄÊµÏÖ
+#pragma endregion SlotFunctorBaseçš„å®ç°
 
-#pragma region MemberFunctionSlot³ÉÔ±º¯ÊıµÄÖ§³Ö
-	//Ö§³Ö3¸ö²ÎÊıµÄ°æ±¾
+#pragma region MemberFunctionSlotæˆå‘˜å‡½æ•°çš„æ”¯æŒ
+	//æ”¯æŒ3ä¸ªå‚æ•°çš„ç‰ˆæœ¬
 	template<typename T,typename ReturnType,typename ArgsType1,typename ArgsType2,typename ArgsType3>
 	class MemberFunctionSlot : public SlotFunctorBase<ReturnType>
 	{
@@ -283,10 +283,10 @@ namespace stl
 		T* d_object;
 	};
 
-#pragma endregion MemberFunctionSlot³ÉÔ±º¯ÊıµÄÖ§³Ö
+#pragma endregion MemberFunctionSlotæˆå‘˜å‡½æ•°çš„æ”¯æŒ
 
-#pragma region FunctorPointerSlotÈ«¾Öº¯ÊıµÄÖ§³Ö
-	//Ö§³Ö3¸ö²ÎÊıµÄ°æ±¾
+#pragma region FunctorPointerSlotå…¨å±€å‡½æ•°çš„æ”¯æŒ
+	//æ”¯æŒ3ä¸ªå‚æ•°çš„ç‰ˆæœ¬
 	template<typename T,typename ReturnType,typename ArgsType1,typename ArgsType2,typename ArgsType3>
 	class FunctorPointerSlot : public SlotFunctorBase<ReturnType>
 	{
@@ -524,14 +524,14 @@ namespace stl
 	private:
 		T* d_functor;
 	};
-#pragma endregion FunctorPointerSlotÈ«¾Öº¯ÊıµÄÖ§³Ö
+#pragma endregion FunctorPointerSlotå…¨å±€å‡½æ•°çš„æ”¯æŒ
 
-#pragma region Function ,·Âstd::function
+#pragma region Function ,ä»¿std::function
 
 	template <typename ReturnType>
 	class function;
 
-	//Ö»´øÈı¸ö²ÎÊıµÄ
+	//åªå¸¦ä¸‰ä¸ªå‚æ•°çš„
 	template<typename ReturnType,typename ArgsType1,typename ArgsType2,typename ArgsType3>
 	class function < ReturnType (ArgsType1,ArgsType2,ArgsType3) >
 	{
@@ -573,7 +573,7 @@ namespace stl
 		{
 			cleanup();
 		}
-		//ÖØÔØ¸´ÖÆ¹¹Ôìº¯Êı
+		//é‡è½½å¤åˆ¶æ„é€ å‡½æ•°
 		function(const function& other)
 		{
 			if (other.d_functor_impl != NULL)
@@ -585,7 +585,7 @@ namespace stl
 				this->d_functor_impl = NULL;
 			}
 		}
-		//ÖØÔØ¸³Öµ·û
+		//é‡è½½èµ‹å€¼ç¬¦
 		function& operator=(const function &other)
 		{
 			cleanup();
@@ -613,12 +613,12 @@ namespace stl
 		}
 		SlotFunctorBase<ReturnType>* getFunctor() const { return d_functor_impl; }
 	protected:
-		//·µ»Ø³ÉÔ±ÊÇ·ñÓĞĞ§£¬ÊÇ·ñÒÑ¾­Á¬½Óµ½Ò»¸ö¾ßÌåµÄFunctorÊµÏÖ
+		//è¿”å›æˆå‘˜æ˜¯å¦æœ‰æ•ˆï¼Œæ˜¯å¦å·²ç»è¿æ¥åˆ°ä¸€ä¸ªå…·ä½“çš„Functorå®ç°
 		bool connected() const
 		{
 			return d_functor_impl != NULL;
 		}
-		//Çå³ıFunctorµÄÊµÀı
+		//æ¸…é™¤Functorçš„å®ä¾‹
 		void cleanup()
 		{
 			if (d_functor_impl)
@@ -631,7 +631,7 @@ namespace stl
 		SlotFunctorBase<ReturnType>* d_functor_impl;
 	};
 
-	//Ö»´øÁ½¸ö²ÎÊıµÄ
+	//åªå¸¦ä¸¤ä¸ªå‚æ•°çš„
 	template<typename ReturnType,typename ArgsType1,typename ArgsType2>
 	class function < ReturnType (ArgsType1,ArgsType2) >
 	{
@@ -671,7 +671,7 @@ namespace stl
 		{
 			cleanup();
 		}
-		//ÖØÔØ¸´ÖÆ¹¹Ôìº¯Êı
+		//é‡è½½å¤åˆ¶æ„é€ å‡½æ•°
 		function(const function& other)
 		{
 			if (other.d_functor_impl != NULL)
@@ -683,7 +683,7 @@ namespace stl
 				this->d_functor_impl = NULL;
 			}
 		}
-		//ÖØÔØ¸³Öµ·û
+		//é‡è½½èµ‹å€¼ç¬¦
 		function& operator=(const function &other)
 		{
 			cleanup();
@@ -711,12 +711,12 @@ namespace stl
 		}
 		SlotFunctorBase<ReturnType>* getFunctor() const { return d_functor_impl; }
 	protected:
-		//·µ»Ø³ÉÔ±ÊÇ·ñÓĞĞ§£¬ÊÇ·ñÒÑ¾­Á¬½Óµ½Ò»¸ö¾ßÌåµÄFunctorÊµÏÖ
+		//è¿”å›æˆå‘˜æ˜¯å¦æœ‰æ•ˆï¼Œæ˜¯å¦å·²ç»è¿æ¥åˆ°ä¸€ä¸ªå…·ä½“çš„Functorå®ç°
 		bool connected() const
 		{
 			return d_functor_impl != NULL;
 		}
-		//Çå³ıFunctorµÄÊµÀı
+		//æ¸…é™¤Functorçš„å®ä¾‹
 		void cleanup()
 		{
 			if (d_functor_impl)
@@ -729,7 +729,7 @@ namespace stl
 		SlotFunctorBase<ReturnType>* d_functor_impl;
 	};
 
-	//Ö»´øÒ»¸ö²ÎÊıµÄ
+	//åªå¸¦ä¸€ä¸ªå‚æ•°çš„
 	template<typename ReturnType,typename ArgsType1>
 	class function < ReturnType (ArgsType1) >
 	{
@@ -769,7 +769,7 @@ namespace stl
 		{
 			cleanup();
 		}
-		//ÖØÔØ¸´ÖÆ¹¹Ôìº¯Êı
+		//é‡è½½å¤åˆ¶æ„é€ å‡½æ•°
 		function(const function& other)
 		{
 			if (other.d_functor_impl != NULL)
@@ -781,7 +781,7 @@ namespace stl
 				this->d_functor_impl = NULL;
 			}
 		}
-		//ÖØÔØ¸³Öµ·û
+		//é‡è½½èµ‹å€¼ç¬¦
 		function& operator=(const function &other)
 		{
 			cleanup();
@@ -809,12 +809,12 @@ namespace stl
 		}
 		SlotFunctorBase<ReturnType>* getFunctor() const { return d_functor_impl; }
 	protected:
-		//·µ»Ø³ÉÔ±ÊÇ·ñÓĞĞ§£¬ÊÇ·ñÒÑ¾­Á¬½Óµ½Ò»¸ö¾ßÌåµÄFunctorÊµÏÖ
+		//è¿”å›æˆå‘˜æ˜¯å¦æœ‰æ•ˆï¼Œæ˜¯å¦å·²ç»è¿æ¥åˆ°ä¸€ä¸ªå…·ä½“çš„Functorå®ç°
 		bool connected() const
 		{
 			return d_functor_impl != NULL;
 		}
-		//Çå³ıFunctorµÄÊµÀı
+		//æ¸…é™¤Functorçš„å®ä¾‹
 		void cleanup()
 		{
 			if (d_functor_impl)
@@ -827,7 +827,7 @@ namespace stl
 		SlotFunctorBase<ReturnType>* d_functor_impl;
 	};
 
-	//²»´ø²ÎÊıµÄ
+	//ä¸å¸¦å‚æ•°çš„
 	template<typename ReturnType>
 	class function < ReturnType () >
 	{
@@ -864,7 +864,7 @@ namespace stl
 		{
 			cleanup();
 		}
-		//ÖØÔØ¸´ÖÆ¹¹Ôìº¯Êı
+		//é‡è½½å¤åˆ¶æ„é€ å‡½æ•°
 		function(const function& other)
 		{
 			if (other.d_functor_impl != NULL)
@@ -876,7 +876,7 @@ namespace stl
 				this->d_functor_impl = NULL;
 			}
 		}
-		//ÖØÔØ¸³Öµ·û
+		//é‡è½½èµ‹å€¼ç¬¦
 		function& operator=(const function &other)
 		{
 			cleanup();
@@ -904,12 +904,12 @@ namespace stl
 		}
 		SlotFunctorBase<ReturnType>* getFunctor() const { return d_functor_impl; }
 	protected:
-		//·µ»Ø³ÉÔ±ÊÇ·ñÓĞĞ§£¬ÊÇ·ñÒÑ¾­Á¬½Óµ½Ò»¸ö¾ßÌåµÄFunctorÊµÏÖ
+		//è¿”å›æˆå‘˜æ˜¯å¦æœ‰æ•ˆï¼Œæ˜¯å¦å·²ç»è¿æ¥åˆ°ä¸€ä¸ªå…·ä½“çš„Functorå®ç°
 		bool connected() const
 		{
 			return d_functor_impl != NULL;
 		}
-		//Çå³ıFunctorµÄÊµÀı
+		//æ¸…é™¤Functorçš„å®ä¾‹
 		void cleanup()
 		{
 			if (d_functor_impl)
@@ -932,8 +932,8 @@ namespace stl
 		extern _Ph<2> _2;
 		extern _Ph<3> _3;
 	}
-	//¶àµãÓÃbindº¯Êı°¡£¬ÓÃ·¨ºÍSTLµÄÊÇÒ»ÑùµÄ
-	//3²ÎÊıµÄº¯Êı°ó¶¨
+	//å¤šç‚¹ç”¨bindå‡½æ•°å•Šï¼Œç”¨æ³•å’ŒSTLçš„æ˜¯ä¸€æ ·çš„
+	//3å‚æ•°çš„å‡½æ•°ç»‘å®š
 	template<typename ReturnType,typename ClassType,typename ArgsType1,typename ArgsType2,typename ArgsType3>
 	function<ReturnType(ArgsType1,ArgsType2,ArgsType3)> bind(ReturnType(ClassType::*memFunc)(ArgsType1,ArgsType2,ArgsType3),ClassType* obj,_Ph<1> placeholde,_Ph<2> placeholde2,_Ph<3> placeholde3)
 	{
@@ -960,7 +960,7 @@ namespace stl
 		MemberFunctionSlot<ClassType,ReturnType,ArgsType1,ArgsType2,ArgsType3> slot(memFunc,obj,arge1,arge2,arge3);
 		return slot;
 	}
-	//3²ÎÊıµÄÈ«¾Öº¯Êı°ó¶¨
+	//3å‚æ•°çš„å…¨å±€å‡½æ•°ç»‘å®š
 	template<typename ReturnType,typename ArgsType1,typename ArgsType2,typename ArgsType3>
 	function<ReturnType(ArgsType1,ArgsType2,ArgsType3)> bind(ReturnType(*memFunc)(ArgsType1,ArgsType2,ArgsType3),_Ph<1> placeholde,_Ph<2> placeholde2,_Ph<3> placeholde3)
 	{
@@ -988,7 +988,7 @@ namespace stl
 		FunctorPointerSlot<ReturnType(ArgsType1,ArgsType2,ArgsType3),ReturnType,ArgsType1,ArgsType2,ArgsType3> slot(memFunc,arge1,arge2,arge3);
 		return slot;
 	}
-	//2²ÎÊıµÄº¯Êı°ó¶¨
+	//2å‚æ•°çš„å‡½æ•°ç»‘å®š
 	template<typename ReturnType,typename ClassType,typename ArgsType1,typename ArgsType2>
 	function<ReturnType(ArgsType1,ArgsType2)> bind(ReturnType(ClassType::*memFunc)(ArgsType1,ArgsType2),ClassType* obj,_Ph<1> placeholde,_Ph<2> placeholde2)
 	{
@@ -1007,7 +1007,7 @@ namespace stl
 		MemberFunctionSlot<ClassType,ReturnType,ArgsType1,ArgsType2,NullType> slot(memFunc,obj,arge1,arge2);
 		return slot;
 	}
-	//2²ÎÊıµÄÈ«¾Öº¯Êı°ó¶¨
+	//2å‚æ•°çš„å…¨å±€å‡½æ•°ç»‘å®š
 	template<typename ReturnType,typename ArgsType1,typename ArgsType2>
 	function<ReturnType(ArgsType1,ArgsType2)> bind(ReturnType(*memFunc)(ArgsType1,ArgsType2),_Ph<1> placeholde,_Ph<2> placeholde2)
 	{
@@ -1027,7 +1027,7 @@ namespace stl
 		FunctorPointerSlot<ReturnType(ArgsType1,ArgsType2),ReturnType,ArgsType1,ArgsType2,NullType> slot(memFunc,arge1,arge2);
 		return slot;
 	}
-	//1²ÎÊıµÄº¯Êı°ó¶¨
+	//1å‚æ•°çš„å‡½æ•°ç»‘å®š
 	template<typename ReturnType,typename ClassType,typename ArgsType1>
 	function<ReturnType(ArgsType1)> bind(ReturnType(ClassType::*memFunc)(ArgsType1),ClassType* obj,_Ph<1> placeholde)
 	{
@@ -1039,7 +1039,7 @@ namespace stl
 		MemberFunctionSlot<ClassType,ReturnType,ArgsType1,NullType,NullType> slot(memFunc,obj,arge1);
 		return slot;
 	}
-	//1²ÎÊıµÄÈ«¾Öº¯Êı°ó¶¨
+	//1å‚æ•°çš„å…¨å±€å‡½æ•°ç»‘å®š
 	template<typename ReturnType,typename ArgsType1>
 	function<ReturnType(ArgsType1)> bind(ReturnType(*memFunc)(ArgsType1),_Ph<1> placeholde)
 	{
@@ -1052,7 +1052,7 @@ namespace stl
 		FunctorPointerSlot<ReturnType(ArgsType1),ReturnType,ArgsType1,NullType,NullType> slot(memFunc,arge1);
 		return slot;
 	}
-	//0²ÎÊıµÄº¯Êı°ó¶¨
+	//0å‚æ•°çš„å‡½æ•°ç»‘å®š
 	template<typename ReturnType,typename ClassType>
 	function<ReturnType()> bind(ReturnType(ClassType::*memFunc)(),ClassType* obj)
 	{
@@ -1064,7 +1064,7 @@ namespace stl
 		FunctorPointerSlot<ReturnType(),ReturnType,NullType,NullType,NullType> slot(memFunc);
 		return slot;
 	}
-	//°Ñ´ø1²ÎÊıµÄfunction¶ÔÏó×ª»¯Îª0²ÎÊıµÄ£¬ÓĞ¿ÕÔÙÊµÏÖÆäËüÊıÁ¿²ÎÊıµÄ
+	//æŠŠå¸¦1å‚æ•°çš„functionå¯¹è±¡è½¬åŒ–ä¸º0å‚æ•°çš„ï¼Œæœ‰ç©ºå†å®ç°å…¶å®ƒæ•°é‡å‚æ•°çš„
 	template<typename ReturnType,typename ArgsType1>
 	function<ReturnType()> bind(const function<ReturnType(ArgsType1)>& ofunction,ArgsType1 arge1)
 	{
